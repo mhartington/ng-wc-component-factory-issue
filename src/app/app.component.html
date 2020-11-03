@@ -1,3 +1,11 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-content>
+    <ion-button (click)="addShadow()">Add to shadow dom</ion-button>
+    <div #testShadow></div>
+  </ion-content>
+
+  <div>
+    <ion-button (click)="addLight()">Add to light dom</ion-button>
+    <div #testLight></div>
+  </div>
 </ion-app>

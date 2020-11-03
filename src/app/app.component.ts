@@ -1,27 +1,31 @@
-import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { TestComponent } from './test/test.component';
+import {
+  Component,
+  ViewChild,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
-  }
+  @ViewChild('testShadow', { read: ViewContainerRef })
+  targetShadow: ViewContainerRef;
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  @ViewChild('testLight', { read: ViewContainerRef })
+  targetLight: ViewContainerRef;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+
+  addShadow() {
+    const cmpFactory = this.componentFactoryResolver.resolveComponentFactory( TestComponent);
+    this.targetShadow.createComponent(cmpFactory);
+  }
+  addLight() {
+    const cmpFactory = this.componentFactoryResolver.resolveComponentFactory( TestComponent);
+    this.targetLight.createComponent(cmpFactory);
   }
 }
